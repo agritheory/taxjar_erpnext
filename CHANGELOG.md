@@ -5,6 +5,21 @@ For license information, please see license.txt-->
 
 <!-- version list -->
 
+## v16.0.0 (2026-07-05)
+
+### Features
+
+- Migrate to version-16
+  ([`8bcf940`](https://github.com/agritheory/taxjar_erpnext/commit/8bcf940812ad4dd2bb179ac54856ccfb6545c7ae))
+
+- Port to version-16
+  ([`4035e56`](https://github.com/agritheory/taxjar_erpnext/commit/4035e563687642e98a2d7d28fb666e616c642b8f))
+
+### Breaking Changes
+
+- Requires Frappe v16 and ERPNext v16
+
+
 ## v15.2.0 (2026-07-05)
 
 ### Features
