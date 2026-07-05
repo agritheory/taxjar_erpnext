@@ -5,6 +5,14 @@ For license information, please see license.txt-->
 
 <!-- version list -->
 
+## v15.2.0 (2026-07-05)
+
+### Features
+
+- Port to version-16
+  ([`4035e56`](https://github.com/agritheory/taxjar_erpnext/commit/4035e563687642e98a2d7d28fb666e616c642b8f))
+
+
 ## v1.1.0 (2026-06-23)
 
 ### Chores
