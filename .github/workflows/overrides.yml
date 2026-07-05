@@ -2,7 +2,10 @@ name: Track Overrides
 
 on:
   pull_request:
-    branches: [version-14, version-15]
+    branches: [version-14, version-15, version-16]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   track_overrides:

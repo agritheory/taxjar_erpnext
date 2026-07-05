@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import json
+import os
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -9,19 +10,27 @@ import frappe
 import pytest
 from frappe.utils import get_bench_path
 
+BENCH_SITES = Path(get_bench_path()) / "sites"
 
-def get_logger(*args, **kwargs):
+# Frappe log handlers write to ../logs relative to cwd. Run pytest from
+# apps/taxjar_erpnext, so chdir to bench/sites before test modules import erpnext.
+os.chdir(BENCH_SITES)
+
+
+def get_logger(module=None, *args, **kwargs):
 	from frappe.utils.logger import get_logger
 
 	return get_logger(
-		module=None,
+		module=module,
 		with_more_info=False,
 		allow_site=True,
 		filter=None,
 		max_size=100_000,
 		file_count=20,
-		stream_only=True,
 	)
+
+
+frappe.logger = get_logger
 
 
 @pytest.fixture(scope="module")
@@ -32,14 +41,13 @@ def monkeymodule():
 
 @pytest.fixture(scope="session", autouse=True)
 def db_instance():
-	frappe.logger = get_logger
-
 	currentsite = "test_site"
-	sites = Path(get_bench_path()) / "sites"
-	if (sites / "common_site_config.json").is_file():
-		currentsite = json.loads((sites / "common_site_config.json").read_text()).get("default_site")
+	if (BENCH_SITES / "common_site_config.json").is_file():
+		currentsite = json.loads((BENCH_SITES / "common_site_config.json").read_text()).get(
+			"default_site"
+		)
 
-	frappe.init(site=currentsite, sites_path=sites)
+	frappe.init(site=currentsite, sites_path=BENCH_SITES)
 	frappe.connect()
 	from taxjar_erpnext.tests.setup import before_test
 

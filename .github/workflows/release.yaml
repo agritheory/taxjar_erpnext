@@ -2,7 +2,10 @@ name: Release
 
 on:
   push:
-    branches: [version-15]
+    branches: [version-15, version-16]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   release:
@@ -21,5 +24,5 @@ jobs:
         uses: python-semantic-release/python-semantic-release@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          git_committer_name: Washmore Development
-          git_committer_email: dev@washmore.app
+          git_committer_name: AgriTheory
+          git_committer_email: support@agritheory.dev

@@ -1,44 +1,20 @@
 [project]
 name = "taxjar_erpnext"
-version = "1.1.0"
+version = "16.0.0"
 description = "TaxJar Integration with ERPNext - Multi-Company Support"
-authors = [
-    { name = "Washmore Development", email = "dev@washmore.app" }
-]
 readme = "README.md"
-requires-python = ">=3.10"
-dynamic = ["dependencies"]
-
-[tool.poetry.dependencies]
-python = "^3.10"
-taxjar = "~1.9.2"
-pycountry = "*"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.2.2"
-pytest-cov = "^5.0.0"
-pytest-order = "^1.2.1"
-test_utils = { git = "https://github.com/agritheory/test_utils.git" }
+requires-python = ">=3.14,<3.15"
+dynamic = [ "dependencies",]
+[[project.authors]]
+name = "Washmore Development"
+email = "dev@washmore.app"
 
 [build-system]
-requires = ["poetry-core"]
+requires = [ "poetry-core",]
 build-backend = "poetry.core.masonry.api"
-
-[tool.bench.frappe-dependencies]
-frappe = ">=15.0.0,<16.0.0"
-erpnext = ">=15.0.0,<16.0.0"
-
-[tool.bench.dev-dependencies]
-pytest = "~=8.2.2"
-pytest-cov = "~=5.0.0"
-pytest-order = "~=1.2.1"
-test_utils = "@git+https://github.com/agritheory/test_utils.git#egg=test_utils"
 
 [tool.codespell]
 skip = "CHANGELOG.md"
-
-[tool.pytest.ini_options]
-addopts = "-s --disable-warnings"
 
 [tool.black]
 line-length = 99
@@ -53,11 +29,38 @@ ensure_newline_before_comments = true
 indent = "\t"
 
 [tool.semantic_release]
-version_toml = ["pyproject.toml:project.version"]
-version_variables = [
-    "taxjar_erpnext/__init__.py:__version__"
-]
+version_toml = [ "pyproject.toml:project.version",]
+version_variables = [ "taxjar_erpnext/__init__.py:__version__",]
 build_command = "echo 1"
 
-[tool.semantic_release.branches.version]
+[tool.poetry.dependencies]
+python = ">=3.14,<3.15"
+taxjar = "~1.9.2"
+pycountry = "*"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0-dev,<17.0.0"
+erpnext = ">=16.0.0-dev,<17.0.0"
+
+[tool.bench.dev-dependencies]
+pytest = "~=8.2.2"
+pytest-cov = "~=5.0.0"
+pytest-order = "~=1.2.1"
+test_utils = "@git+https://github.com/agritheory/test_utils.git#egg=test_utils"
+
+[tool.pytest.ini_options]
+addopts = "-s --disable-warnings"
+
+[tool.semantic_release.branches.version-16]
+match = "version-16"
+
+[tool.semantic_release.branches.version-15]
 match = "version-15"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+pytest-cov = "^5.0.0"
+pytest-order = "^1.2.1"
+
+[tool.poetry.group.dev.dependencies.test_utils]
+git = "https://github.com/agritheory/test_utils.git"
